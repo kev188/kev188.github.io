@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Información de Domicilio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="domicilio.css">
+</head>
+<body>
+    <h1>Información de Domicilio</h1>
+    <form id="formulario-domicilio">
+        <label for="domicilio-nombre">Nombre:</label>
+        <input type="text" id="domicilio-nombre" name="nombre" required>
+        <br><br>
+        <label for="domicilio-telefono">Teléfono:</label>
+        <input type="tel" id="domicilio-telefono" name="telefono" required>
+        <br><br>
+        <label for="domicilio-direccion">Dirección:</label>
+        <input type="text" id="domicilio-direccion" name="direccion" required>
+        <br><br>
+        <label for="domicilio-calle">Calle:</label>
+        <input type="text" id="domicilio-calle" name="calle" required>
+        <br><br>
+        <label for="domicilio-colonia">Colonia:</label>
+        <input type="text" id="domicilio-colonia" name="colonia" required>
+        <br><br>
+        <label for="domicilio-municipio">Municipio:</label>
+        <input type="text" id="domicilio-municipio" name="municipio" required>
+        <br><br>
+        <label for="domicilio-estado">Estado:</label>
+        <input type="text" id="domicilio-estado" name="estado" required>
+        <br><br>
+
+        <!-- Botón para enviar -->
+        <button id="enviar">Enviar Pedido</button>
+    </form>
+    <p id="confirmacion"></p>
+
+    <script src="pagina-domicilio.js"></script>
+</body>
+</html>
