@@ -22,31 +22,25 @@ const ensalada = localStorage.getItem('domicilio-ensalada') === "true" ? "$35" :
 const metodoPago = localStorage.getItem('domicilio-metodoPago') || "No especificado";
 
 // Recuperar el total desde localStorage
-const total = parseFloat(localStorage.getItem('domicilio-total')) || 0;
+const total = localStorage.getItem('domicilio-total') || "0";
 
-// Función para asignar valores al DOM
-const asignarValor = (id, valor) => {
-    const elemento = document.getElementById(id);
-    if (elemento) elemento.textContent = valor;
-};
+// Mostrar los datos en el HTML
+document.getElementById('domicilio-nombre').textContent = nombre;
+document.getElementById('domicilio-telefono').textContent = telefono;
+document.getElementById('domicilio-direccion').textContent = direccion;
+document.getElementById('domicilio-calle').textContent = calle;
+document.getElementById('domicilio-colonia').textContent = colonia;
+document.getElementById('domicilio-municipio').textContent = municipio;
+document.getElementById('domicilio-estado').textContent = estado;
 
-// Asignar valores al DOM
-asignarValor('domicilio-nombre', nombre);
-asignarValor('domicilio-telefono', telefono);
-asignarValor('domicilio-direccion', direccion);
-asignarValor('domicilio-calle', calle);
-asignarValor('domicilio-colonia', colonia);
-asignarValor('domicilio-municipio', municipio);
-asignarValor('domicilio-estado', estado);
+document.getElementById('domicilio-pizza1').textContent = pizza1;
+document.getElementById('domicilio-pizza2').textContent = pizza2;
+document.getElementById('domicilio-pizza3').textContent = pizza3;
 
-asignarValor('domicilio-pizza1', pizza1);
-asignarValor('domicilio-pizza2', pizza2);
-asignarValor('domicilio-pizza3', pizza3);
+document.getElementById('domicilio-refresco').textContent = refresco;
+document.getElementById('domicilio-papas').textContent = papas;
+document.getElementById('domicilio-postre').textContent = postre;
+document.getElementById('domicilio-ensalada').textContent = ensalada;
 
-asignarValor('domicilio-refresco', refresco);
-asignarValor('domicilio-papas', papas);
-asignarValor('domicilio-postre', postre);
-asignarValor('domicilio-ensalada', ensalada);
-
-asignarValor('domicilio-metodoPago', metodoPago);
-asignarValor('domicilio-total', `$${total.toFixed(2)}`);
+document.getElementById('domicilio-metodoPago').textContent = metodoPago;
+document.getElementById('domicilio-total').textContent = total;

@@ -1,39 +1,15 @@
-const formulario = document.getElementById('formulario');
-const local = document.getElementById('local');
-const domicilio = document.getElementById('domicilio');
-const metodoPago = document.getElementById('metodo-pago');
-const pagoTarjeta = document.getElementById('pago-tarjeta');
+// Restricción global basada en el horario
+const ahora = new Date();
+const horas = ahora.getHours();
 
-// Mostrar u ocultar campos de tarjeta según el método de pago
-metodoPago.addEventListener('change', () => {
-    if (metodoPago.value === 'Tarjeta') {
-        pagoTarjeta.style.display = 'block';
-    } else {
-        pagoTarjeta.style.display = 'none';
-    }
-});
-
-// Lógica para el botón "Pedido Local"
-local.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Limpiar datos antiguos de local
-    localStorage.removeItem('local-pizza1');
-    localStorage.removeItem('local-pizza2');
-    localStorage.removeItem('local-pizza3');
-    localStorage.removeItem('local-refresco');
-    localStorage.removeItem('local-papas');
-    localStorage.removeItem('local-postre');
-    localStorage.removeItem('local-ensalada');
-    localStorage.removeItem('local-metodoPago');
-    localStorage.removeItem('local-total');
-
-    // Obtener las pizzas seleccionadas
-    const pizza1 = document.getElementById('pizza1').value;
-    const pizza2 = document.getElementById('pizza2').value;
-    const pizza3 = document.getElementById('pizza3').value;
-
-    // Obtener los precios de las pizzas
+// Verificar si la hora está entre las 9:00 AM y las 9:00 PM
+if (horas < 9 || horas >= 21) {
+    document.body.innerHTML = '<h1>Gracias por su preferencia, lo esperamos en horario laboral (9:00 AM - 9:00 PM).</h1>';
+    document.body.style.color = 'red'; // Cambiar el color del mensaje a rojo
+    document.body.style.textAlign = 'center'; // Centrar el mensaje
+    document.body.style.marginTop = '20%'; // Ajustar la posición del mensaje
+} else {
+    // Declarar precios de pizzas en el nivel global
     const preciosPizzas = {
         'Nada': 0,
         'Mexicana': 100,
@@ -41,110 +17,116 @@ local.addEventListener('click', (e) => {
         'Hawaiana': 110
     };
 
-    // Sumar precios de las pizzas
-    let total = preciosPizzas[pizza1] + preciosPizzas[pizza2] + preciosPizzas[pizza3];
+    // Obtener elementos del DOM
+    const formulario = document.getElementById('formulario');
+    const local = document.getElementById('local');
+    const domicilio = document.getElementById('domicilio');
+    const metodoPago = document.getElementById('metodo-pago');
+    const pagoTarjeta = document.getElementById('pago-tarjeta');
 
-    // Obtener los complementos seleccionados
-    const refresco = document.getElementById('refresco').checked;
-    const papas = document.getElementById('papas').checked;
-    const postre = document.getElementById('postre').checked;
-    const ensalada = document.getElementById('ensalada').checked;
+    // Mostrar u ocultar campos de tarjeta según el método de pago
+    metodoPago.addEventListener('change', () => {
+        pagoTarjeta.style.display = metodoPago.value === 'Tarjeta' ? 'block' : 'none';
+    });
 
-    // Sumar precios de los complementos
-    if (refresco) total += 30;
-    if (papas) total += 45;
-    if (postre) total += 55;
-    if (ensalada) total += 35;
+    // Función para calcular el total
+    const calcularTotal = (pizzas, complementos) => {
+        let total = pizzas.reduce((acc, pizza) => acc + preciosPizzas[pizza], 0);
+        if (complementos.refresco) total += 30;
+        if (complementos.papas) total += 45;
+        if (complementos.postre) total += 55;
+        if (complementos.ensalada) total += 35;
+        return total;
+    };
 
-    // Obtener el método de pago y validar campos de tarjeta si es necesario
-    const metodo = metodoPago.value;
-    if (metodo === 'Tarjeta') {
-        const numTarjeta = document.getElementById('num-tarjeta').value;
-        const fechaExp = document.getElementById('fecha-exp').value;
-        const cvv = document.getElementById('cvv').value;
+    // Función para guardar datos del pedido en localStorage
+    const guardarPedido = (tipo, pizzas, complementos, metodo, total) => {
+        localStorage.setItem(`${tipo}-pizza1`, `${pizzas[0]} ($${preciosPizzas[pizzas[0]]})`);
+        localStorage.setItem(`${tipo}-pizza2`, `${pizzas[1]} ($${preciosPizzas[pizzas[1]]})`);
+        localStorage.setItem(`${tipo}-pizza3`, `${pizzas[2]} ($${preciosPizzas[pizzas[2]]})`);
+        localStorage.setItem(`${tipo}-refresco`, complementos.refresco);
+        localStorage.setItem(`${tipo}-papas`, complementos.papas);
+        localStorage.setItem(`${tipo}-postre`, complementos.postre);
+        localStorage.setItem(`${tipo}-ensalada`, complementos.ensalada);
+        localStorage.setItem(`${tipo}-metodoPago`, metodo);
+        localStorage.setItem(`${tipo}-total`, total);
+    };
 
-        const tarjetaValida = /^\d{16}$/.test(numTarjeta);
-        const fechaValida = /^\d{2}\/\d{2}$/.test(fechaExp);
-        const cvvValido = /^\d{3}$/.test(cvv);
+    // Lógica del botón "Pedido Local"
+    local.addEventListener('click', (e) => {
+        e.preventDefault();
 
-        if (!tarjetaValida || !fechaValida || !cvvValido) {
-            alert('Por favor, ingresa correctamente los datos de la tarjeta.');
-            return;
+        // Limpiar datos antiguos
+        ['pizza1', 'pizza2', 'pizza3', 'refresco', 'papas', 'postre', 'ensalada', 'metodoPago', 'total'].forEach(item => {
+            localStorage.removeItem(`local-${item}`);
+        });
+
+        // Obtener datos de entrada
+        const pizzas = [
+            document.getElementById('pizza1').value,
+            document.getElementById('pizza2').value,
+            document.getElementById('pizza3').value
+        ];
+        const complementos = {
+            refresco: document.getElementById('refresco').checked,
+            papas: document.getElementById('papas').checked,
+            postre: document.getElementById('postre').checked,
+            ensalada: document.getElementById('ensalada').checked
+        };
+        const metodo = metodoPago.value;
+
+        // Validación del método de pago
+        if (metodo === 'Tarjeta') {
+            const numTarjeta = document.getElementById('num-tarjeta').value;
+            const fechaExp = document.getElementById('fecha-exp').value;
+            const cvv = document.getElementById('cvv').value;
+
+            const tarjetaValida = /^\d{16}$/.test(numTarjeta);
+            const fechaValida = /^\d{2}\/\d{2}$/.test(fechaExp);
+            const cvvValido = /^\d{3}$/.test(cvv);
+
+            if (!tarjetaValida || !fechaValida || !cvvValido) {
+                alert('Por favor, ingresa correctamente los datos de la tarjeta.');
+                return;
+            }
         }
-    }
 
-    // Guardar datos en localStorage
-    localStorage.setItem('local-pizza1', `${pizza1} ($${preciosPizzas[pizza1]})`);
-    localStorage.setItem('local-pizza2', `${pizza2} ($${preciosPizzas[pizza2]})`);
-    localStorage.setItem('local-pizza3', `${pizza3} ($${preciosPizzas[pizza3]})`);
-    localStorage.setItem('local-refresco', refresco);
-    localStorage.setItem('local-papas', papas);
-    localStorage.setItem('local-postre', postre);
-    localStorage.setItem('local-ensalada', ensalada);
-    localStorage.setItem('local-metodoPago', metodo);
-    localStorage.setItem('local-total', total);
+        // Calcular total y guardar datos
+        const total = calcularTotal(pizzas, complementos);
+        guardarPedido('local', pizzas, complementos, metodo, total);
 
-    // Redirigir al ticket-local.html
-    window.location.href = 'ticket-local.html';
-});
+        // Redirigir a la página de ticket local
+        window.location.href = 'ticket-local.html';
+    });
 
-// Lógica para el botón "Pedido a Domicilio"
-domicilio.addEventListener('click', (e) => {
-    e.preventDefault();
+    // Lógica del botón "Pedido a Domicilio"
+    domicilio.addEventListener('click', (e) => {
+        e.preventDefault();
 
-    // Limpiar datos antiguos de domicilio
-    localStorage.removeItem('domicilio-pizza1');
-    localStorage.removeItem('domicilio-pizza2');
-    localStorage.removeItem('domicilio-pizza3');
-    localStorage.removeItem('domicilio-refresco');
-    localStorage.removeItem('domicilio-papas');
-    localStorage.removeItem('domicilio-postre');
-    localStorage.removeItem('domicilio-ensalada');
-    localStorage.removeItem('domicilio-metodoPago');
-    localStorage.removeItem('domicilio-total'); // Limpiar el total anterior
+        // Limpiar datos antiguos
+        ['pizza1', 'pizza2', 'pizza3', 'refresco', 'papas', 'postre', 'ensalada', 'metodoPago', 'total'].forEach(item => {
+            localStorage.removeItem(`domicilio-${item}`);
+        });
 
-    // Obtener las pizzas seleccionadas
-    const pizza1 = document.getElementById('pizza1').value;
-    const pizza2 = document.getElementById('pizza2').value;
-    const pizza3 = document.getElementById('pizza3').value;
+        // Obtener datos de entrada
+        const pizzas = [
+            document.getElementById('pizza1').value,
+            document.getElementById('pizza2').value,
+            document.getElementById('pizza3').value
+        ];
+        const complementos = {
+            refresco: document.getElementById('refresco').checked,
+            papas: document.getElementById('papas').checked,
+            postre: document.getElementById('postre').checked,
+            ensalada: document.getElementById('ensalada').checked
+        };
+        const metodo = metodoPago.value;
 
-    // Obtener los precios de las pizzas
-    const preciosPizzas = {
-        'Nada': 0,
-        'Mexicana': 100,
-        'Pepperoni': 120,
-        'Hawaiana': 110
-    };
+        // Calcular total y guardar datos
+        const total = calcularTotal(pizzas, complementos);
+        guardarPedido('domicilio', pizzas, complementos, metodo, total);
 
-    // Sumar precios de las pizzas
-    let total = preciosPizzas[pizza1] + preciosPizzas[pizza2] + preciosPizzas[pizza3];
-
-    // Obtener los complementos seleccionados
-    const refresco = document.getElementById('refresco').checked;
-    const papas = document.getElementById('papas').checked;
-    const postre = document.getElementById('postre').checked;
-    const ensalada = document.getElementById('ensalada').checked;
-
-    // Sumar precios de los complementos
-    if (refresco) total += 30;
-    if (papas) total += 45;
-    if (postre) total += 55;
-    if (ensalada) total += 35;
-
-    // Obtener el método de pago
-    const metodo = metodoPago.value;
-
-    // Guardar datos en localStorage
-    localStorage.setItem('domicilio-pizza1',`${pizza1} ($${preciosPizzas[pizza1]})`);
-    localStorage.setItem('domicilio-pizza2', `${pizza2} ($${preciosPizzas[pizza2]})`);
-    localStorage.setItem('domicilio-pizza3', `${pizza3} ($${preciosPizzas[pizza3]})`);
-    localStorage.setItem('domicilio-refresco', refresco);
-    localStorage.setItem('domicilio-papas', papas);
-    localStorage.setItem('domicilio-postre', postre);
-    localStorage.setItem('domicilio-ensalada', ensalada);
-    localStorage.setItem('domicilio-metodoPago', metodo);
-    localStorage.setItem('domicilio-total', total); // Guardar el total
-
-    // Redirigir a la página de domicilio
-    window.location.href = 'pagina-domicilio.html';
-});
+        // Redirigir a la página de pedido a domicilio
+        window.location.href = 'pagina-domicilio.html';
+    });
+}

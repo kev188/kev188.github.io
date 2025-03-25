@@ -1,65 +1,78 @@
-/* Estilos generales */
-body {
-    background-color: #000; /* Fondo negro para simular una pantalla retro */
-    font-family: 'Press Start 2P', cursive; /* Fuente pixelada retro */
-    color: #fff; /* Texto blanco para contraste */
-    margin: 0;
-    padding: 0;
+/* ---- Ticket de Domicilio - Sin imagen ---- */
+body.ticket {
+    background: #000;
+    font-family: 'VT323', monospace;
+    color: #00FF00;
+    padding: 10px;
+}
+
+.ticket-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #000;
+    border: 3px solid #FF00FF;
+    position: relative;
+    box-shadow: 
+        0 0 15px #FF00FF,
+        inset 0 0 10px #00FFFF;
 }
 
 h1 {
-    color: #ff0; /* Amarillo brillante */
+    color: #00FFFF;
+    font-size: 2.2rem;
     text-align: center;
-    font-size: 36px;
-    text-shadow: 4px 4px #f00; /* Sombra roja para efecto pixelado */
-    margin-top: 20px;
+    margin: 10px 0 20px;
+    text-shadow: 0 0 10px #00FFFF;
+    letter-spacing: 3px;
 }
 
-h2 {
-    color: #0f0; /* Verde brillante */
-    font-size: 24px;
-    margin-top: 20px;
-    text-shadow: 2px 2px #f00; /* Sombra roja */
-}
-
-p {
-    font-size: 14px; /* Tamaño de fuente más pequeño para estilo retro */
-    color: #0f0; /* Verde brillante */
-    margin: 8px 0;
-}
-
-span {
-    font-weight: bold;
-    color: #f00; /* Rojo brillante para destacar */
-}
-
-/* Contenedor del ticket */
-.ticket-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #222; /* Fondo oscuro */
-    border: 4px solid #ff0; /* Borde amarillo brillante */
-    border-radius: 0; /* Sin bordes redondeados */
-    box-shadow: 8px 8px 0px #f00; /* Sombra roja para efecto 3D retro */
-}
-
-/* Detalles del pedido */
 .detalles-pedido {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #000; /* Fondo negro */
-    border: 2px solid #ff0; /* Borde amarillo */
+    margin: 20px 0;
+    border-top: 2px dotted #FF00FF;
+    border-bottom: 2px dotted #FF00FF;
+    padding: 15px 0;
 }
 
 .detalles-pedido p {
-    margin: 5px 0;
+    margin: 12px 0;
+    font-size: 1.3rem;
+    color: #FFFF00;
+    position: relative;
+    padding-left: 25px;
 }
 
-/* Total */
+.detalles-pedido p::before {
+    content: "🍕";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .total {
-    color: #f00; /* Rojo brillante */
-    font-size: 18px;
-    font-weight: bold;
+    color: #FF0000;
+    font-size: 1.8rem;
+    text-align: right;
     margin-top: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    animation: glitch 1s infinite alternate;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 2px 0 #00FFFF, -2px -2px 0 #FF00FF; }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    100% { text-shadow: -2px -2px 0 #00FFFF, 2px 2px 0 #FF00FF; }
+}
+
+/* Efecto de borde de circuito */
+.ticket-container::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px dashed rgba(0, 255, 255, 0.3);
+    pointer-events: none;
 }

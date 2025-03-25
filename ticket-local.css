@@ -1,65 +1,84 @@
-/* Estilos generales */
-body {
-    background-color: #000; /* Fondo negro para simular una pantalla retro */
-    font-family: 'Press Start 2P', cursive; /* Fuente pixelada retro */
-    color: #fff; /* Texto blanco para contraste */
-    margin: 0;
-    padding: 0;
+/* ---- Ticket Local (Estilo Arcade) ---- */
+body.ticket-local {
+    background: #000;
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700; /* Amarillo arcade */
+    padding: 10px;
+    line-height: 1.5;
 }
 
-h1 {
-    color: #ff0; /* Amarillo brillante */
-    text-align: center;
-    font-size: 36px;
-    text-shadow: 4px 4px #f00; /* Sombra roja para efecto pixelado */
-    margin-top: 20px;
-}
-
-h2 {
-    color: #0f0; /* Verde brillante */
-    font-size: 24px;
-    margin-top: 20px;
-    text-shadow: 2px 2px #f00; /* Sombra roja */
-}
-
-p {
-    font-size: 14px; /* Tamaño de fuente más pequeño para estilo retro */
-    color: #0f0; /* Verde brillante */
-    margin: 8px 0;
-}
-
-span {
-    font-weight: bold;
-    color: #f00; /* Rojo brillante para destacar */
-}
-
-/* Contenedor del ticket */
-.ticket-container {
-    max-width: 800px;
+.ticket-local-container {
+    max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #222; /* Fondo oscuro */
-    border: 4px solid #ff0; /* Borde amarillo brillante */
-    border-radius: 0; /* Sin bordes redondeados */
-    box-shadow: 8px 8px 0px #f00; /* Sombra roja para efecto 3D retro */
+    background: #000;
+    border: 4px solid #FFD700;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
-/* Detalles del pedido */
-.detalles-pedido {
+.ticket-local-container::before {
+    content: "⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    right: 0;
+    color: #FFD700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+h1.ticket-local-title {
+    color: #FFD700;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 10px 0 20px;
+    text-shadow: 0 0 5px #FFA500;
+}
+
+.detalles-pedido-local {
+    margin: 20px 0;
+    border-top: 2px dashed #FFD700;
+    border-bottom: 2px dashed #FFD700;
+    padding: 15px 0;
+}
+
+.detalles-pedido-local p {
+    margin: 15px 0;
+    font-size: 0.8rem;
+    color: #FFF;
+    position: relative;
+    padding-left: 20px;
+}
+
+.detalles-pedido-local p::before {
+    content: "■";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+}
+
+.total-local {
+    color: #FF4500; /* Naranja brillante */
+    font-size: 1.3rem;
+    text-align: right;
     margin-top: 20px;
-    padding: 10px;
-    background-color: #000; /* Fondo negro */
-    border: 2px solid #ff0; /* Borde amarillo */
+    animation: blink-local 0.7s infinite alternate;
 }
 
-.detalles-pedido p {
-    margin: 5px 0;
+@keyframes blink-local {
+    from { opacity: 1; }
+    to { opacity: 0.6; }
 }
 
-/* Total */
-.total {
-    color: #f00; /* Rojo brillante */
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
+/* Efecto de esquinas pixeladas */
+.ticket-local-container::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #FFD700;
+    top: -4px;
+    left: -4px;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
 }
