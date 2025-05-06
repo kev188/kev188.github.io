@@ -1,0 +1,113 @@
+/* Configuración general */
+body {
+    background-color: #050505;
+    color: #00ffea;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Fondo con circuito digital */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('circuitos.png'); /* Imagen de fondo con circuitos */
+    background-size: cover;
+    opacity: 0.15; /* Para que se vea sutil */
+    z-index: -1;
+}
+
+/* Título con efecto neón */
+h1 {
+    font-size: 32px;
+    text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea, 0 0 40px #00ffea;
+}
+
+/* Secciones con bordes iluminados */
+section {
+    background-color: rgba(10, 10, 10, 0.8);
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 10px;
+    border: 2px solid #00ffea;
+    box-shadow: 0 0 10px #00ffea;
+}
+
+#curiosidades ul li {
+    padding: 5px; /* Ajuste específico para esta sección */
+}
+
+/* Ajuste para el menú lateral */
+#menuLateral {
+    position: fixed;
+    top: 0; /* Ubicado en la parte superior */
+    left: -250px; /* Oculto por defecto */
+    width: 250px;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.9);
+    color: white;
+    box-shadow: 2px 0 10px #00ffea;
+    transition: 0.3s;
+    padding-top: 80px;
+}
+
+#menuLateral ul {
+    list-style: none; /* Quitar los puntos de la lista */
+    padding: 0;
+    margin: 0;
+}
+
+#menuLateral ul li {
+    padding: 5px 0; /* Reducir espacio entre elementos */
+}
+
+#menuLateral ul li a {
+    text-decoration: none;
+    color: #00ffea;
+    font-size: 18px;
+    display: block;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+/* Asegurar que el menú se despliega */
+.menu-abierto {
+    left: 0 !important;
+}
+
+/* Botón del menú en la esquina superior izquierda */
+#menuToggle {
+    font-size: 24px;
+    background-color: #00ffea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px; /* Ahora está en la esquina superior izquierda */
+    z-index: 999;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+    
+    section {
+        width: 95%;
+    }
+
+    #menuLateral {
+        width: 200px;
+    }
+}
