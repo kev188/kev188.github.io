@@ -1,3 +1,30 @@
+/* Estilos generales */
+.toggle-btn {
+    background-color: #00ffea;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.toggle-btn:hover {
+    background-color: #ff00ff;
+    transform: scale(1.1);
+}
+
+/* Ocultar las secciones al inicio */
+.info-section {
+    display: none;
+    background-color: rgba(10, 10, 10, 0.8);
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffea;
+}
+
 /* Configuración general */
 body {
     background-color: #050505;
@@ -97,17 +124,69 @@ section {
     z-index: 999;
 }
 
-/* Responsividad */
-@media (max-width: 600px) {
+/* Responsividad general */
+@media (max-width: 768px) {
     h1 {
-        font-size: 24px;
+        padding-top: 60px;
+        font-size: 24px; /* Reducir tamaño en móviles */
     }
     
     section {
-        width: 95%;
+        width: 95%; /* Ajustar ancho */
+    }
+
+    .toggle-btn {
+        font-size: 16px; /* Botones más pequeños */
+        padding: 8px 12px;
+    }
+
+    .info-section {
+        padding: 15px; /* Ajustar espaciado en móviles */
+    }
+
+    #menuToggle{
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+    }
+
+    /* Ajuste para el menú lateral en móviles */
+    #menuLateral {
+        position:absolute;
+        width: 80%;
+        height: auto;
+        top:50%;
+        left:-80%;
+    }
+
+    #menuLateral ul li a {
+        font-size: 16px; /* Texto más pequeño para pantallas pequeñas */
+        padding: 8px;
+    }
+}
+
+/* Estilos para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* Texto más pequeño */
+    }
+
+    .toggle-btn {
+        width: 100%; /* Botones ocupan el ancho completo */
+        font-size: 14px;
+    }
+
+    section {
+        padding: 15px; /* Menos espacio para mejor ajuste */
     }
 
     #menuLateral {
-        width: 200px;
+        width: 180px; /* Reducir ancho del menú */
+    }
+
+    #menuToggle {
+        font-size: 20px; /* Botón del menú más pequeño */
+        padding: 8px;
     }
 }

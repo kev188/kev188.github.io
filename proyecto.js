@@ -7,3 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
         menuLateral.classList.toggle('menu-abierto');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const botones = document.querySelectorAll('.toggle-btn');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            const targetId = boton.getAttribute('data-target');
+            const section = document.getElementById(targetId);
+
+            section.style.display = (section.style.display === 'none' || !section.style.display) ? 'block' : 'none';
+        });
+    });
+});
