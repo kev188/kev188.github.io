@@ -1,0 +1,60 @@
+/* Estilos generales */
+body {
+    background-color: #050505;
+    color: #00ffea;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Botones para desplegar información */
+.toggle-btn {
+    background-color: #00ffea;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: 0.3s;
+    display: block;
+    width: 90%;
+    max-width: 500px;
+}
+
+.toggle-btn:hover {
+    background-color: #ff00ff;
+    transform: scale(1.1);
+}
+
+/* Ajuste del ancho y disposición del contenido */
+.info-section {
+    display: none;
+    background-color: rgba(10, 10, 10, 0.8);
+    padding: 15px;
+    margin: 10px auto;
+    width: 75%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffea;
+    text-align: left;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 768px) {
+    .info-section {
+        width: 85%;
+        max-width: 450px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-section {
+        width: 90%;
+        max-width: 350px;
+        padding: 10px;
+        font-size: 14px;
+    }
+}
