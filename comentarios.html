@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+    <link rel="stylesheet" href="comentarios.css">
+</head>
+<body>
+    <h1>Deja tu Comentario</h1>
+    
+    <form id="comentarioForm" action="https://formspree.io/f/xldblagg" method="POST">
+        <div class="campo">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu Nombre">
+        </div>
+        
+        <div class="campo">
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required placeholder="ejemplo@email.com">
+        </div>
+
+        <div class="campo">
+            <label for="mensaje">Comentario:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu comentario..."></textarea>
+        </div>
+        
+        <div class="botones">
+            <button type="submit">Enviar</button>
+            <button type="button" id="btnRegresar">Volver al Proyecto</button>
+        </div>
+    </form>
+
+    <script src="comentarios.js"></script>
+</body>
+</html>
