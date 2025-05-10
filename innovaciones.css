@@ -1,0 +1,79 @@
+body {
+    background-color: #050505;
+    color: #00ffea;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
+}
+
+.innovaciones-list {
+    list-style: none;
+    padding: 0;
+    font-size: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.innovaciones-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: rgba(0, 255, 234, 0.2);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Botón de regreso */
+#btnRegresar {
+    margin-top: 30px;
+    padding: 12px 18px;
+    font-size: 18px;
+    background-color: #00ffea;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btnRegresar:hover {
+    background-color: #ff00ff;
+    transform: scale(1.1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .innovaciones-list li {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    #btnRegresar {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .innovaciones-list li {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    #btnRegresar {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
