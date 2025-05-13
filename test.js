@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
     });
 
-    // ✅ Evento al hacer clic en "Descargar PDF"
+    // Evento al hacer clic en "Descargar PDF"
     btnDescargarPDF.addEventListener("click", () => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -44,15 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
             let seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
             let respuesta = seleccionada ? seleccionada.value : "No contestada";
             let esCorrecto = seleccionada && respuesta === respuestasCorrectas[pregunta];
-            doc.text(`${index + 1}. ${respuesta} ${esCorrecto ? "✔️" : "❌"}`, 10, y);
+            doc.text(doc.splitTextToSize(`${index + 1}. ${respuesta} ${esCorrecto ? "✔️" : "❌"}`, 180), 10, y);
             y += 10;
         });
 
         doc.save("Resultados_Test_Videojuegos.pdf");
     });
 
-    // ✅ Botón de regreso
+    // Botón de regreso
     btnRegresar.addEventListener("click", () => {
         window.location.href = "proyecto.html";
     });
 });
+
