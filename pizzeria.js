@@ -130,3 +130,11 @@ if (horas < 9 || horas >= 21) {
         window.location.href = 'pagina-domicilio.html';
     });
 }
+// Capturar el botón "Regresar al Menú"
+const regresar = document.getElementById('regresar');
+
+// Manejar la redirección al menú principal
+regresar.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'index.html'; // Redirige a la página principal
+});
