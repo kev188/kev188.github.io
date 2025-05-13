@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
             let respuesta = seleccionada ? seleccionada.value : "No contestada";
             let esCorrecto = seleccionada && respuesta === respuestasCorrectas[pregunta];
-            doc.cell(10, y, 180, 10, `${index + 1}. ${respuesta} ${esCorrecto ? "✔️" : "❌"}`);
+            doc.cell(10, y, 180, 10, `${index + 1}. ${respuesta} ${esCorrecto ? "Bien" : "Mal"}`);
             y += 10;
         });
 
