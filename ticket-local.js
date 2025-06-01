@@ -36,10 +36,19 @@ document.getElementById('descargar-pdf').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
+    // Recuperar datos del usuario desde localStorage
+    const nombre = localStorage.getItem('nombre') || "No especificado";
+    const telefono = localStorage.getItem('telefono') || "No especificado";
+    const direccion = localStorage.getItem('direccion') || "No especificado";
+    const calle = localStorage.getItem('calle') || "No especificado";
+    const colonia = localStorage.getItem('colonia') || "No especificado";
+    const municipio = localStorage.getItem('municipio') || "No especificado";
+    const estado = localStorage.getItem('estado') || "No especificado";
+
     // Agregar título al PDF
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
-    doc.text("Ticket de Pedido a Domicilio", 20, 20);
+    doc.text("Ticket de Pedido Local", 20, 20);
 
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
@@ -73,11 +82,5 @@ document.getElementById('descargar-pdf').addEventListener('click', () => {
     y = agregarTexto(`Total a Pagar: $${total}`, 20, y);
 
     // Descargar el PDF
-    doc.save("ticket-pedido-domicilio.pdf");
+    doc.save("ticket-pedido-local.pdf");
 });
-
-const btnRegresar = document.getElementById("btnRegresar");
-// Botón de regreso
-    btnRegresar.addEventListener("click", () => {
-        window.location.href = "pizzeria.html";
-    });
