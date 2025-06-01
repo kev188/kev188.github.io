@@ -36,15 +36,6 @@ document.getElementById('descargar-pdf').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Recuperar datos del usuario desde localStorage
-    const nombre = localStorage.getItem('nombre') || "No especificado";
-    const telefono = localStorage.getItem('telefono') || "No especificado";
-    const direccion = localStorage.getItem('direccion') || "No especificado";
-    const calle = localStorage.getItem('calle') || "No especificado";
-    const colonia = localStorage.getItem('colonia') || "No especificado";
-    const municipio = localStorage.getItem('municipio') || "No especificado";
-    const estado = localStorage.getItem('estado') || "No especificado";
-
     // Agregar título al PDF
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
@@ -61,14 +52,6 @@ document.getElementById('descargar-pdf').addEventListener('click', () => {
 
     let y = 40;
 
-    y = agregarTexto(`Nombre: ${nombre}`, 20, y);
-    y = agregarTexto(`Teléfono: ${telefono}`, 20, y);
-    y = agregarTexto(`Dirección: ${direccion}`, 20, y);
-    y = agregarTexto(`Calle: ${calle}`, 20, y);
-    y = agregarTexto(`Colonia: ${colonia}`, 20, y);
-    y = agregarTexto(`Municipio: ${municipio}`, 20, y);
-    y = agregarTexto(`Estado: ${estado}`, 20, y);
-
     y = agregarTexto(`Pizza 1: ${pizza1}`, 20, y);
     y = agregarTexto(`Pizza 2: ${pizza2}`, 20, y);
     y = agregarTexto(`Pizza 3: ${pizza3}`, 20, y);
@@ -83,4 +66,9 @@ document.getElementById('descargar-pdf').addEventListener('click', () => {
 
     // Descargar el PDF
     doc.save("ticket-pedido-local.pdf");
+});
+
+// Botón de regreso
+document.getElementById('btnRegresar').addEventListener('click', () => {
+    window.location.href = "pizzeria.html";
 });
