@@ -1,32 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket de Pedido Local</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="ticket-local.css">
+    <style>
+        /* ---- Ticket Local (Estilo Arcade) ---- */
+        body {
+            background: #000;
+            font-family: 'Press Start 2P', cursive;
+            color: #FFD700;
+            padding: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .ticket-local-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #000;
+            border: 4px solid #FFD700;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .ticket-local-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px #FFA500;
+        }
+
+        .detalles-pedido-local {
+            margin: 20px 0;
+            border-top: 2px dashed #FFD700;
+            border-bottom: 2px dashed #FFD700;
+            padding: 15px 0;
+        }
+
+        .detalles-pedido-local p {
+            margin: 15px 0;
+            font-size: 0.8rem;
+            color: #FFF;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .detalles-pedido-local p::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+
+        .total-local {
+            color: #FF4500;
+            font-size: 1.3rem;
+            text-align: right;
+            margin-top: 20px;
+            animation: blink-local 0.7s infinite alternate;
+        }
+
+        @keyframes blink-local {
+            from { opacity: 1; }
+            to { opacity: 0.6; }
+        }
+
+        /* Estilos para los botones */
+        .boton {
+            background: #FFD700;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: 2px solid #FFA500;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.7);
+            display: block;
+            margin: 10px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .boton:hover {
+            background: #FFA500;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Ticket de Pedido en Local</h1>
-    
-    <h2>Información de las Pizzas</h2>
-    <p><strong>Pizza 1:</strong> <span id="local-pizza1"></span></p>
-    <p><strong>Pizza 2:</strong> <span id="local-pizza2"></span></p>
-    <p><strong>Pizza 3:</strong> <span id="local-pizza3"></span></p>
-    
-    <h2>Complementos</h2>
-    <p><strong>Refresco:</strong> <span id="local-refresco"></span></p>
-    <p><strong>Papas:</strong> <span id="local-papas"></span></p>
-    <p><strong>Postre:</strong> <span id="local-postre"></span></p>
-    <p><strong>Ensalada:</strong> <span id="local-ensalada"></span></p>
+    <div class="ticket-local-container">
+        <h1 class="ticket-local-title">Ticket de Pedido en Local</h1>
+        
+        <div class="detalles-pedido-local">
+            <h2>Información de las Pizzas</h2>
+            <p><strong>Pizza 1:</strong> <span id="local-pizza1"></span></p>
+            <p><strong>Pizza 2:</strong> <span id="local-pizza2"></span></p>
+            <p><strong>Pizza 3:</strong> <span id="local-pizza3"></span></p>
+        </div>
 
-    <h2>Método de Pago</h2>
-    <p><strong>Método:</strong> <span id="local-metodoPago"></span></p>
+        <div class="detalles-pedido-local">
+            <h2>Complementos</h2>
+            <p><strong>Refresco:</strong> <span id="local-refresco"></span></p>
+            <p><strong>Papas:</strong> <span id="local-papas"></span></p>
+            <p><strong>Postre:</strong> <span id="local-postre"></span></p>
+            <p><strong>Ensalada:</strong> <span id="local-ensalada"></span></p>
+        </div>
 
-    <h2>Total a Pagar</h2>
-    <p><strong>Total:</strong> $<span id="local-total"></span></p>
+        <div class="detalles-pedido-local">
+            <h2>Método de Pago</h2>
+            <p><strong>Método:</strong> <span id="local-metodoPago"></span></p>
+        </div>
 
+        <div class="detalles-pedido-local">
+            <h2>Total a Pagar</h2>
+            <p class="total-local"><strong>Total:</strong> $<span id="local-total"></span></p>
+        </div>
+
+        <button id="descargar-pdf" class="boton">Descargar PDF</button>
+        <button type="button" id="btnRegresar" class="boton">Regresar</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="ticket-local.js"></script>
 </body>
 </html>
-
 
