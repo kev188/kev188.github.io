@@ -1,91 +1,83 @@
-// Recuperar datos del domicilio desde localStorage
-const nombre = localStorage.getItem('nombre') || "No especificado";
-const telefono = localStorage.getItem('telefono') || "No especificado";
-const direccion = localStorage.getItem('direccion') || "No especificado";
-const calle = localStorage.getItem('calle') || "No especificado";
-const colonia = localStorage.getItem('colonia') || "No especificado";
-const municipio = localStorage.getItem('municipio') || "No especificado";
-const estado = localStorage.getItem('estado') || "No especificado";
+// Recuperar datos desde localStorage
+const datosDomicilio = [
+    { id: 'domicilio-nombre', key: 'nombre', label: "Nombre" },
+    { id: 'domicilio-telefono', key: 'telefono', label: "Teléfono" },
+    { id: 'domicilio-direccion', key: 'direccion', label: "Dirección" },
+    { id: 'domicilio-calle', key: 'calle', label: "Calle" },
+    { id: 'domicilio-colonia', key: 'colonia', label: "Colonia" },
+    { id: 'domicilio-municipio', key: 'municipio', label: "Municipio" },
+    { id: 'domicilio-estado', key: 'estado', label: "Estado" }
+];
 
-// Recuperar las pizzas seleccionadas desde localStorage
-const pizza1 = localStorage.getItem('domicilio-pizza1') || "No seleccionada";
-const pizza2 = localStorage.getItem('domicilio-pizza2') || "No seleccionada";
-const pizza3 = localStorage.getItem('domicilio-pizza3') || "No seleccionada";
+const datosPedido = [
+    { id: 'domicilio-pizza1', key: 'domicilio-pizza1', label: "Pizza 1" },
+    { id: 'domicilio-pizza2', key: 'domicilio-pizza2', label: "Pizza 2" },
+    { id: 'domicilio-pizza3', key: 'domicilio-pizza3', label: "Pizza 3" }
+];
 
-// Recuperar los complementos seleccionados desde localStorage
-const refresco = localStorage.getItem('domicilio-refresco') === "true" ? "$30" : "No seleccionado";
-const papas = localStorage.getItem('domicilio-papas') === "true" ? "$45" : "No seleccionado";
-const postre = localStorage.getItem('domicilio-postre') === "true" ? "$55" : "No seleccionado";
-const ensalada = localStorage.getItem('domicilio-ensalada') === "true" ? "$35" : "No seleccionado";
+const datosComplementos = [
+    { id: 'domicilio-refresco', key: 'domicilio-refresco', label: "Refresco", precio: "$30" },
+    { id: 'domicilio-papas', key: 'domicilio-papas', label: "Papas", precio: "$45" },
+    { id: 'domicilio-postre', key: 'domicilio-postre', label: "Postre", precio: "$55" },
+    { id: 'domicilio-ensalada', key: 'domicilio-ensalada', label: "Ensalada", precio: "$35" }
+];
 
-// Recuperar el método de pago desde localStorage
-const metodoPago = localStorage.getItem('domicilio-metodoPago') || "No especificado";
+const datosPago = [
+    { id: 'domicilio-metodoPago', key: 'domicilio-metodoPago', label: "Método de Pago" },
+    { id: 'domicilio-total', key: 'domicilio-total', label: "Total a Pagar", prefix: "$" }
+];
 
-// Recuperar el total desde localStorage
-const total = localStorage.getItem('domicilio-total') || "0";
+// Función para mostrar datos en la página
+const mostrarDatos = (datos) => {
+    datos.forEach(el => {
+        const valor = localStorage.getItem(el.key) || "No especificado";
+        document.getElementById(el.id).textContent = el.precio && valor === "true" ? el.precio : (el.prefix ? `${el.prefix}${valor}` : valor);
+    });
+};
 
-// Mostrar los datos en el HTML
-document.getElementById('domicilio-nombre').textContent = nombre;
-document.getElementById('domicilio-telefono').textContent = telefono;
-document.getElementById('domicilio-direccion').textContent = direccion;
-document.getElementById('domicilio-calle').textContent = calle;
-document.getElementById('domicilio-colonia').textContent = colonia;
-document.getElementById('domicilio-municipio').textContent = municipio;
-document.getElementById('domicilio-estado').textContent = estado;
+// Mostrar datos en la página
+mostrarDatos(datosDomicilio);
+mostrarDatos(datosPedido);
+mostrarDatos(datosComplementos);
+mostrarDatos(datosPago);
 
-document.getElementById('domicilio-pizza1').textContent = pizza1;
-document.getElementById('domicilio-pizza2').textContent = pizza2;
-document.getElementById('domicilio-pizza3').textContent = pizza3;
-
-document.getElementById('domicilio-refresco').textContent = refresco;
-document.getElementById('domicilio-papas').textContent = papas;
-document.getElementById('domicilio-postre').textContent = postre;
-document.getElementById('domicilio-ensalada').textContent = ensalada;
-
-document.getElementById('domicilio-metodoPago').textContent = metodoPago;
-document.getElementById('domicilio-total').textContent = `$${total}`;
-
-// Capturar el botón de descarga
+// Capturar el botón de descarga y generar el PDF
 document.getElementById('descargar-pdf').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Agregar título al PDF
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
     doc.text("Ticket de Pedido a Domicilio", 20, 20);
-
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
 
-    // Función para agregar contenido al PDF
-    const agregarTexto = (texto, x, y) => {
-        doc.text(texto, x, y);
-        return y + 10; // Mueve la posición hacia abajo para la siguiente línea
+    let y = 40;
+    
+    const agregarTexto = (datos) => {
+        datos.forEach(el => {
+            const valor = document.getElementById(el.id).textContent || "No especificado";
+            doc.text(`${el.label}: ${valor}`, 20, y);
+            y += 10;
+        });
     };
 
-    let y = 40;
+    agregarTexto(datosDomicilio);
+    y += 5;
+    doc.text("Pedido", 20, y);
+    y += 10;
+    agregarTexto(datosPedido);
+    y += 5;
+    doc.text("Complementos", 20, y);
+    y += 10;
+    agregarTexto(datosComplementos);
+    y += 5;
+    agregarTexto(datosPago);
 
-    y = agregarTexto(`Nombre: ${nombre}`, 20, y);
-    y = agregarTexto(`Teléfono: ${telefono}`, 20, y);
-    y = agregarTexto(`Dirección: ${direccion}`, 20, y);
-    y = agregarTexto(`Calle: ${calle}`, 20, y);
-    y = agregarTexto(`Colonia: ${colonia}`, 20, y);
-    y = agregarTexto(`Municipio: ${municipio}`, 20, y);
-    y = agregarTexto(`Estado: ${estado}`, 20, y);
-
-    y = agregarTexto(`Pizza 1: ${pizza1}`, 20, y);
-    y = agregarTexto(`Pizza 2: ${pizza2}`, 20, y);
-    y = agregarTexto(`Pizza 3: ${pizza3}`, 20, y);
-
-    y = agregarTexto(`Refresco: ${refresco}`, 20, y);
-    y = agregarTexto(`Papas: ${papas}`, 20, y);
-    y = agregarTexto(`Postre: ${postre}`, 20, y);
-    y = agregarTexto(`Ensalada: ${ensalada}`, 20, y);
-
-    y = agregarTexto(`Método de Pago: ${metodoPago}`, 20, y);
-    y = agregarTexto(`Total a Pagar: $${total}`, 20, y);
-
-    // Descargar el PDF
     doc.save("ticket-pedido-domicilio.pdf");
+});
+
+// Botón de regreso
+document.getElementById('btnRegresar').addEventListener('click', () => {
+    window.history.back();
 });
