@@ -14,27 +14,68 @@ h1 {
     text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
 }
 
-/* Lista de ranking */
-.ranking-list {
-    list-style: none;
-    padding: 0;
-    font-size: 20px;
-    max-width: 600px;
+/* Contenedor del carrusel */
+.carrusel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    max-width: 800px;
     margin: auto;
 }
 
-.ranking-list li {
-    margin: 10px 0;
+/* Carrusel */
+.carrusel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.juego {
+    flex: 0 0 100%;
+    text-align: center;
+}
+
+/* Ajuste de imágenes para tamaño uniforme */
+.juego img {
+    width: 70%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffea;
+}
+
+/* Botones de navegación */
+#prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 255, 234, 0.6);
+    border: none;
+    font-size: 24px;
     padding: 10px;
-    background-color: rgba(0, 255, 234, 0.2);
-    border-radius: 5px;
-    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10; /* Asegura que los botones sean interactivos */
+}
+
+#prevBtn:hover, #nextBtn:hover {
+    background-color: #ff00ff;
+    transform: scale(1.1, 1.1);
+}
+
+#prevBtn {
+    left: 10px;
+}
+
+#nextBtn {
+    right: 10px;
 }
 
 /* Botón de regreso */
 #btnRegresar {
     margin-top: 30px;
-    padding: 12px 18px;
+    padding: 10px 15px;
     font-size: 18px;
     background-color: #00ffea;
     color: black;
@@ -45,38 +86,27 @@ h1 {
 
 #btnRegresar:hover {
     background-color: #ff00ff;
-    transform: scale(1.1);
+    transform: scale(1.1, 1.1);
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 28px;
+    .juego img {
+        width: 80%;
     }
 
-    .ranking-list li {
-        font-size: 16px;
+    #prevBtn, #nextBtn {
+        font-size: 20px;
         padding: 8px;
-    }
-
-    #btnRegresar {
-        font-size: 16px;
-        padding: 10px 15px;
     }
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 24px;
+    .juego img {
+        width: 90%;
     }
 
-    .ranking-list li {
-        font-size: 14px;
-        padding: 6px;
-    }
-
-    #btnRegresar {
-        font-size: 14px;
-        padding: 8px 12px;
+    #prevBtn, #nextBtn {
+        font-size: 18px;
     }
 }
