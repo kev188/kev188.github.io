@@ -41,3 +41,8 @@ enviar.addEventListener('click', (e) => {
         confirmacion.style.color = 'red'; // Cambiar el color del mensaje a rojo
     }
 });
+
+// Botón de regreso
+document.getElementById('btnRegresar').addEventListener('click', () => {
+    window.location.href = "pizzeria.html";
+});
