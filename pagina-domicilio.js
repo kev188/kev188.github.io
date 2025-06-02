@@ -42,7 +42,12 @@ enviar.addEventListener('click', (e) => {
     }
 });
 
-// Botón de regreso
-document.getElementById('btnRegresar').addEventListener('click', () => {
-    window.location.href = "pizzeria.html";
+// Botón de regreso con animación antes de redirigir
+document.getElementById('btnRegresar').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.body.style.transition = "opacity 0.5s";
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+        window.location.href = "pizzeria.html";
+    }, 500);
 });
