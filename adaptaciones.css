@@ -28,6 +28,24 @@ h1 {
     font-size: 18px;
 }
 
+/* Estilos para imágenes */
+.adaptaciones-list img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 234, 0.6);
+    transition: 0.3s ease-in-out;
+}
+
+/* Efecto hover */
+.adaptaciones-list img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+}
+
 /* Botón de regreso */
 #btnRegresar {
     margin-top: 30px;
@@ -56,6 +74,10 @@ h1 {
         padding: 8px;
     }
 
+    .adaptaciones-list img {
+        max-width: 300px;
+    }
+
     #btnRegresar {
         font-size: 16px;
         padding: 10px 15px;
@@ -72,8 +94,13 @@ h1 {
         padding: 6px;
     }
 
+    .adaptaciones-list img {
+        max-width: 250px;
+    }
+
     #btnRegresar {
         font-size: 14px;
         padding: 8px 12px;
     }
 }
+  
