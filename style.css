@@ -1,7 +1,7 @@
 /* Estilos generales */
 .toggle-btn {
     background-color: #00ffea;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 10px 15px;
     font-size: 18px;
@@ -46,7 +46,7 @@ body::before {
     height: 100%;
     background-image: url('circuitos.png'); /* Imagen de fondo con circuitos */
     background-size: cover;
-    opacity: 0.15; /* Para que se vea sutil */
+    opacity: 0.15;
     z-index: -1;
 }
 
@@ -68,32 +68,28 @@ section {
     box-shadow: 0 0 10px #00ffea;
 }
 
-#curiosidades ul li {
-    padding: 5px; /* Ajuste específico para esta sección */
-}
-
 /* Ajuste para el menú lateral */
 #menuLateral {
     position: fixed;
-    top: 0; /* Ubicado en la parte superior */
-    left: -250px; /* Oculto por defecto */
+    top: 0;
+    left: -250px;
     width: 250px;
     height: 100%;
     background-color: rgba(10, 10, 10, 0.9);
-    color: white;
+    color: rgb(0, 0, 0);
     box-shadow: 2px 0 10px #00ffea;
     transition: 0.3s;
     padding-top: 80px;
 }
 
 #menuLateral ul {
-    list-style: none; /* Quitar los puntos de la lista */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 #menuLateral ul li {
-    padding: 5px 0; /* Reducir espacio entre elementos */
+    padding: 5px 0;
 }
 
 #menuLateral ul li a {
@@ -114,79 +110,161 @@ section {
 #menuToggle {
     font-size: 24px;
     background-color: #00ffea;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     cursor: pointer;
     padding: 10px;
     position: fixed;
     top: 10px;
-    left: 10px; /* Ahora está en la esquina superior izquierda */
+    left: 10px;
     z-index: 999;
 }
 
-/* Responsividad general */
+/* Botón para regresar al menú */
+#btnRegresar {
+    background-color: #00ffea;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+/* Efecto al pasar el cursor sin mover el botón */
+#btnRegresar:hover {
+    background-color: #ff00ff;
+    transform: scale(1.1, 1.1);
+}
+
+/* Responsividad */
 @media (max-width: 768px) {
     h1 {
-        padding-top: 60px;
-        font-size: 24px; /* Reducir tamaño en móviles */
+        font-size: 24px;
     }
     
     section {
-        width: 95%; /* Ajustar ancho */
+        width: 95%;
     }
 
     .toggle-btn {
-        font-size: 16px; /* Botones más pequeños */
+        font-size: 16px;
         padding: 8px 12px;
     }
 
     .info-section {
-        padding: 15px; /* Ajustar espaciado en móviles */
+        padding: 15px;
     }
 
-    #menuToggle{
-        position: fixed;
+    #menuToggle {
         top: 10px;
         left: 10px;
-        z-index: 1000;
     }
 
-    /* Ajuste para el menú lateral en móviles */
-    #menuLateral {
-        position:absolute;
-        width: 80%;
-        height: auto;
-        top:50%;
-        left:-80%;
-    }
-
-    #menuLateral ul li a {
-        font-size: 16px; /* Texto más pequeño para pantallas pequeñas */
-        padding: 8px;
+    /* Ajuste del botón de regresar */
+    #btnRegresar {
+        font-size: 16px;
+        padding: 8px 12px;
+        bottom: 15px;
     }
 }
 
-/* Estilos para pantallas muy pequeñas (menos de 480px) */
 @media (max-width: 480px) {
     h1 {
-        font-size: 20px; /* Texto más pequeño */
+        font-size: 20px;
     }
 
     .toggle-btn {
-        width: 100%; /* Botones ocupan el ancho completo */
+        width: 100%;
         font-size: 14px;
     }
 
     section {
-        padding: 15px; /* Menos espacio para mejor ajuste */
+        padding: 15px;
     }
 
     #menuLateral {
-        width: 180px; /* Reducir ancho del menú */
+        width: 180px;
     }
 
     #menuToggle {
-        font-size: 20px; /* Botón del menú más pequeño */
+        font-size: 20px;
         padding: 8px;
+    }
+
+    #btnRegresar {
+        font-size: 14px;
+        padding: 6px 10px;
+        bottom: 10px;
+    }
+}
+
+/* Contenedor general de las imágenes dentro de las secciones desplegables */
+.info-section {
+    display: none;
+    background-color: rgba(10, 10, 10, 0.8);
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffea;
+    text-align: center;
+}
+
+/* Estilo común para todas las imágenes */
+.info-section img {
+    width: 100%;
+    max-width: 300px; /* Tamaño ajustado */
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffea;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto al pasar el cursor */
+.info-section img:hover {
+    transform: scale(1.1);
+}
+
+/* Ajustes individuales para cada imagen */
+#ciencia img {
+    border: 2px solid #00ffea;
+}
+
+#gtaV img {
+    border: 2px solid #ff00ff;
+}
+
+#pacman img {
+    border: 2px solid #ffcc00;
+    max-width: 280px; /* Ajustado para que sea más pequeño */
+}
+
+#virt img {
+    border: 2px solid #ff6600; /* Nuevo color para Virt */
+}
+
+#gone img {
+    border: 2px solid #66ff99; /* Nuevo color para Gone */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .info-section img {
+        max-width: 250px;
+    }
+
+    #pacman img {
+        max-width: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-section img {
+        max-width: 200px;
+    }
+
+    #pacman img {
+        max-width: 240px;
     }
 }
