@@ -20,11 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-// Capturar el botón "Regresar al Menú"
-const regresar = document.getElementById('regresar');
-
-// Manejar la redirección al menú principal
-regresar.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = 'index.html'; // Redirige a la página principal
+btnRegresar.addEventListener("click", () => {
+        window.location.href = "index.html";
 });
