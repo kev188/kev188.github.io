@@ -6,7 +6,13 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    background-image: url("pppp.png"); /* Cambia esto por la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para que cubra todo */
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(70%); /* Reduce el brillo para que no sea demasiado invasiva */
 }
+
 
 /* Botones para desplegar información */
 .toggle-btn {

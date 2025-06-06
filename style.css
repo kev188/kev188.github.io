@@ -34,7 +34,13 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-image: url("pppp.png"); /* Cambia esto por la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para que cubra todo */
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(70%); /* Reduce el brillo para que no sea demasiado invasiva */
 }
+
 
 /* Fondo con circuito digital */
 body::before {
@@ -247,6 +253,22 @@ section {
 #gone img {
     border: 2px solid #66ff99; /* Nuevo color para Gone */
 }
+
+.image-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 600px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción */
+    border: 4px solid cyan; /* Borde neón */
+    box-shadow: 0px 0px 15px cyan; /* Efecto brillante */
+    border-radius: 10px; /* Bordes ligeramente redondeados */
+}
+
+
 
 /* Responsividad */
 @media (max-width: 768px) {
