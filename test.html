@@ -4,13 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test de Videojuegos</title>
-    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202020;
+            color: #eaeaea;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            font-weight: bold;
+        }
+
+        form {
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            max-width: 500px;
+            margin: auto;
+            border: 2px solid #ffcc00;
+        }
+
+        ol {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #eaeaea;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-left: 15px;
+            font-size: 14px;
+            color: #ffcc00;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #ffcc00;
+            color: #202020;
+            border: 2px solid #caa800;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #caa800;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none; /* Asegura que el modal no aparezca al inicio */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .modal-contenido {
+            background: #2b2b2b;
+            padding: 20px;
+            width: 50%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 204, 0, 0.5);
+            text-align: center;
+            border: 2px solid #ffcc00;
+        }
+
+        .cerrar {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #ffcc00;
+        }
+
+        @media (max-width: 480px) {
+            .modal-contenido {
+                width: 90%;
+            }
+        }
+
+    </style>
 </head>
 <body>
+
     <h1>Test de Videojuegos</h1>
-    <h3>"L" o similar significa Mal X,
-    "þ" o similar Bien √ (esto es para el pdf)</h3>
-    
+
     <form id="testForm">
         <ol>
             <li>¿Cuál es el nombre del protagonista de The Legend of Zelda?
@@ -76,13 +189,19 @@
         </ol>
 
         <div class="botones">
-            <button type="button" id="btnRegresar">Volver al Proyecto</button>
-            <button type="button" id="btnFinalizar">Finalizar</button>
+            <button type="button" id="btnFinalizar">Finalizar Test</button>
             <button type="button" id="btnDescargarPDF">Descargar PDF</button>
-
+            <button type="button" id="btnRegresar">Regresar</button>
         </div>
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <div id="modalResultado" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <div id="resultadoTest"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="test.js"></script>
 
 </body>
